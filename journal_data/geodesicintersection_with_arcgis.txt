@@ -1,0 +1,53 @@
+// ArcGIS 10.4
+
+// Make a new Feature Class with: 
+// Point type
+// WGS84 Geographic Reference System
+// Cluster: 0.000000001 (0.3 mm ecuador) Resolution: 0.0000000005 (0.15 mm ecuador)
+// Create 3 Geodesic Lines with the data from the paper
+
+
+// Use the tool feature vertices to points (to get a new layer for checking the density points)
+// Use frecuency tools to find out how many points has each of the 3 segments
+
+// Make an intersection of the segments (with Geoprocessing / Intersects or other tool).
+
+// Add a field (double) to the attribute table and do calculate geometry (or add xy coordiantes from arctool box)
+// Change the properties of the field to show 12 decimal places.
+// To see the DMS you can add field (text type) and use calculate geometry
+// From the attribute table press export and select txt file
+
+
+AB1;CD1;14,528627872500067;54,057255744500083
+AB4;CD4;50,479069137000067;-79,282819925499950
+AB3;CD3;54,717012665500079;-14,563892228999975 (*)
+AB2;CD2;51,865640108000036;5,227448286000026
+
+//TO make the ArcGIS + UTM, just project the layer to the UTM best zone and make the intersection again
+
+Case 1 huso 33 -> 469139,1261 5989999,8419 -> 14 31 42.774213  54 3 26.284184 -> 14.5285483925224, 54.0573011622007
+Case 2 huso 31 -> 653363.7876 5748439.9201 -> 5 13 38.814497 51 51 56.306569 -> 5.227448471388889, 51.865640713611114
+Case 3 huso 28 - 18-35  -> 528095.4061   6063390.7888 -> 14 33 49.881487  54 43 1.306624 -> 14.563855968611112, 54.71702961777778
+Case 4 huso 17 - 15-42  -> 621834.591 5593306.598 -> 79 16 58.1521147 50 28 44.650603 -> 79.2828200318611, 50.479069611944446
+
+
+
+//Checking the algorithm
+After creating a densify geodetic line. These are the closet four points to the intersection X
+AB -14.544318332499927 54.715868167500048
+AB -14.795837024999969 54.730574622000063
+CD -14.536222783999960 54.670731065000041
+CD -14.602377404999970 54.781385317000058
+
+
+//Check with PostGIS that ArcGIS uses planar calculations
+//If we apply just a cartesian intersection we get the same result (*) which means ArcGIS does not use any calculation on the esferoid:  
+// POINT(-14.5638922289509 54.7170126654087)(*)
+
+create table testag (name varchar, geom geometry (linestring, 4326));
+insert into testag values ('AB', 'SRID=4326;LINESTRING (-14.544318332499927 54.715868167500048, -14.795837024999969 54.730574622000063)');
+insert into testag values ('CD', 'SRID=4326;LINESTRING (-14.536222783999960 54.670731065000041, -14.602377404999970 54.781385317000058)');
+select st_astext (st_intersection(t1.geom,t2.geom)) from testag t1, testag t2 where t1.name='AB' and t2.name='CD';
+-- POINT(-14.5638922289509 54.7170126654087)
+
+
