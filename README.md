@@ -1,5 +1,5 @@
 # Geodesic Spatial Operators on the ellipsoid
-Two implementations (in Java and PlpgSQL for PostGIS) to obtain the intersection of two geodesic lines and the minimun distance from a point to a geodesic line with a high accuracy (better than 100nm), supporting long distances (greater than 10000 km).
+Two implementations (in Java and PlpgSQL for PostGIS) to obtain the intersection of two geodesic lines and the minimun distance from a point to a geodesic line with a high accuracy (better than 100nm), supporting long distances (greater than 180 degrees).
 
 The research is published in this paper: (write the paper reference when it is published). The directory <i>journal_data</i> contains all the data from the tests and results calculated for the paper.
 
