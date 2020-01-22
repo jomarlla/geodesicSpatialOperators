@@ -10,7 +10,7 @@ The research is published in this paper: (write the paper reference when it is p
 -	You do not have to worry anymore about choosing the best-fit local projection to analysis your spatial data.
 
 
-The file <i>GeodesicSpatialOp.Java</i> contains the Java implementation, and the file <i>proposed_algorithm_postgis.sql</i> the Pl/pgSQL implementation for PostGIS.
+The file <i>GeodesicSpatialOp.Java</i> contains the Java implementation, and the file <i>GeodesicSpatialOp.sql</i> the Pl/pgSQL implementation for PostGIS.
 
 
 You can try the geodesic intersection with the Java implementation <i>GeodesicIntersection.jar</i> from a shell like (20000 executions per second in a Core i7 4771 processor):
