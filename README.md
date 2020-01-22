@@ -10,10 +10,10 @@ The research is published in this paper: (write the paper reference when it is p
 -	You do not have to worry anymore about choosing the best-fit local projection to analysis your spatial data.
 
 
-The file <i>src/GeodesicSpatialOp.Java</i> contains the Java implementation, and the file <i>src/proposed_algorithm_postgis.sql</i> the Pl/pgSQL implementation for PostGIS.
+The file <i>GeodesicSpatialOp.Java</i> contains the Java implementation, and the file <i>proposed_algorithm_postgis.sql</i> the Pl/pgSQL implementation for PostGIS.
 
 
-You can try the geodesic intersection with the Java implementation <i>src/GeodesicIntersection.jar</i> from a shell like (20000 executions per second in a Core i7 4771 processor):
+You can try the geodesic intersection with the Java implementation <i>GeodesicIntersection.jar</i> from a shell like (20000 executions per second in a Core i7 4771 processor):
 <p align="center">
   <img src="imgs/consoleout_20000_executions_intersection.png" width="600" title="Geodesic Intersection with Java">
 </p>
@@ -23,7 +23,7 @@ and the minimum distance from a point to a geodesic line with (40000 executions 
   <img src="imgs/consoleout_40000_executions_mindistance.png" width="600" title="Geodesic Intersection with Java">
 </p>
 
-To use the new spatial operators with PostGIS, run the file <i>src/proposed_algorithm_postgis.sql</i> in a PostGIS database.
+To use the new spatial operators with PostGIS, run the file <i>src/GeodesicSpatialOp.sql</i> in a PostGIS database.
 The SQL method <i>STX_GeodesicIntersection</i> returns the intersection point of the two geodesics in PostGIS:
 <p align="center">
   <img src="imgs/postgis_geodesicintersection.png" width="500" title="Geodesic Intersection with Java">
